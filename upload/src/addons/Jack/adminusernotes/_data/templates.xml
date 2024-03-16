@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+  <template type="admin" title="admin_user_notes" version_id="10000" version_string="0.1.0.0"><![CDATA[<xf:title>{{ phrase('notes:') }} {$user.username}</xf:title>
+
+<xf:if is="$total > 0">
+	<div class="block">
+		<div class="block-container">
+			<div class="block-body">
+				<xf:macro name="admin_user_notes" arg-notes="{$notes}" />
+			</div>
+		</div>
+		<xf:pagenav page="{$page}" perpage="{$perPage}" total="{$total}"
+			link="users/change-log" data="{$user}"
+			wrapperclass="block-outer block-outer--after" />
+	</div>
+<xf:else />
+	<div class="blockMessage">{{ phrase('notes_no_notes_have_been_logged') }}</div>
+</xf:if>
+
+<xf:form action="{{link('users/adminusernotes', $user)}}" ajax="true" data-force-flash-message="on" class="block">
+	<xf:formrow rowtype="input"
+				label="{{ phrase('note') }}"
+				labelid="{{ phrase('note') }}"
+				hint="{{ phrase('required') }}">
+			<xf:textarea name="note" value="" rows="5" autosize="true" required="required" />
+	</xf:formrow>
+	<xf:submitrow>
+		<xf:html>
+			<xf:button type="submit" class="button--primary">
+				{{ phrase('add') }} {{ phrase('note') }}
+			</xf:button>
+		</xf:html>
+	</xf:submitrow>
+</xf:form>
+
+<xf:macro name="admin_user_notes" arg-notes="!">
+	<xf:datalist data-xf-init="responsive-data-list">
+	<thead>
+		<xf:datarow rowtype="header">
+			<xf:cell class="dataList-cell--minWidth">{{ phrase('created_by') }}</xf:cell>
+			<xf:cell class="dataList-cell--minWidth">{{ phrase('note') }}</xf:cell>
+		</xf:datarow>
+	</thead>
+	<xf:foreach loop="$notes" value="$note">
+		<tbody class="dataList-rowGroup">
+			<xf:datarow rowtype="subsection" rowclass="dataList-row--noHover">
+				<xf:cell href="{{ link('users/edit', $note.User) }}" colspan="3">
+					<span class="u-pullRight"><xf:date time="{$note.creation_date}" /></span>
+					<ul class="listInline listInline--bullet">
+						<li><xf:avatar user="$note.User" size="xxs" href="" /> {$note.User.username}</li>
+					</ul>
+				</xf:cell>
+			</xf:datarow>
+			<xf:datarow rowclass="{{ $change.protected ? 'dataList-row--protected' : '' }}">
+				<xf:cell class="dataList-cell--minWidth dataList-cell--breakWord" colspan="2">{$note.note}</xf:cell>
+			</xf:datarow>
+		</tbody>
+	</xf:foreach>
+	</xf:datalist>
+</xf:macro>]]></template>
+</templates>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phrases>
+  <phrase title="note" version_id="10000" version_string="0.1.0.0"><![CDATA[Note]]></phrase>
+  <phrase title="notes" version_id="10000" version_string="0.1.0.0"><![CDATA[Notes]]></phrase>
+  <phrase title="notes_error_enter_a_note" version_id="10000" version_string="0.1.0.0"><![CDATA[Please enter a note to be added to the account.]]></phrase>
+  <phrase title="notes_no_notes_have_been_logged" version_id="10000" version_string="0.1.0.0"><![CDATA[No notes have been logged for this user.]]></phrase>
+</phrases>
